@@ -24,7 +24,25 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Back-end for ABC Shop
+พัฒนาโดย Framework Nest.js และ MySQL Database 
+
+## Requirement
+
+```bash
+$ Node.js Version 16+
+$ MySQL Database Server (Run on port 3306)
+```
+
+## API Document
+
+$ https://documenter.getpostman.com/view/24973301/2s8YzZNyAe
+
+
+## ER-Diagram
+
+<img src="https://sv1.img.in.th/pVBfJ.png" width="200" alt="" />
+
 
 ## Installation
 
@@ -40,34 +58,11 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## Note
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+- Application รันบน port 3000
+- รายละเอียดการตั้งค่า Database อยู่ที่ไฟล์ app.module.ts
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
