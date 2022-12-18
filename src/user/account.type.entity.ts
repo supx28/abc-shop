@@ -5,7 +5,7 @@ import { User } from './user.entity';
 @Entity()
 export class AccountType extends BaseEntity {
 
-    @Column({ name: 'name'})
+    @Column({ name: 'name' })
     name: AccountType.Name;
 
     @Column({ name: 'status', nullable: true })

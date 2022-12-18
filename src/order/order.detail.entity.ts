@@ -9,11 +9,11 @@ export class OrderDetail extends BaseEntity {
     @Column({ name: 'quantity' })
     quantity: number;
 
-    @ManyToOne(type => Product)
+    @ManyToOne(type => Product, { eager: true })
     @JoinColumn({ name: "product_id" })
     product: Product;
 
-    @ManyToOne(type => Order)
+    @ManyToOne(type => Order, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "order_id" })
     order: Order;
 

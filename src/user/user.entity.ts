@@ -3,6 +3,7 @@ import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { AccountType } from './account.type.entity';
 import { UserProfile } from './user.profile.entity';
 import { Exclude } from "class-transformer";
+import { Order } from 'src/order/order.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -16,12 +17,15 @@ export class User extends BaseEntity {
     @Column({ name: 'status' })
     status: User.Status;
 
-    @ManyToOne(type => AccountType , {eager: true})
+    @ManyToOne(type => AccountType, { eager: true })
     @JoinColumn({ name: "account_type_id" })
     accountType: AccountType;
 
-    @OneToMany(type => UserProfile, userProfile => userProfile.user, {eager: true})
+    @OneToMany(type => UserProfile, userProfile => userProfile.user, { eager: true })
     profiles: UserProfile[];
+
+    @OneToMany(type => Order, order => order.user)
+    order: Order[];
 }
 
 export namespace User {

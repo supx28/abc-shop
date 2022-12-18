@@ -46,6 +46,7 @@ AppModule = __decorate([
                 charset: 'UTF8_UNICODE_CI',
                 migrationsRun: true,
                 migrations: [_1671226461376_DefaultData_1.DefaultData1671226461376],
+                logging: false,
             }),
             auth_module_1.AuthModule,
             user_module_1.UserModule,

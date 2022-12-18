@@ -21,12 +21,12 @@ __decorate([
     __metadata("design:type", Number)
 ], OrderDetail.prototype, "quantity", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(type => product_entity_1.Product),
+    (0, typeorm_1.ManyToOne)(type => product_entity_1.Product, { eager: true }),
     (0, typeorm_1.JoinColumn)({ name: "product_id" }),
     __metadata("design:type", product_entity_1.Product)
 ], OrderDetail.prototype, "product", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(type => order_entity_1.Order),
+    (0, typeorm_1.ManyToOne)(type => order_entity_1.Order, { onDelete: 'CASCADE' }),
     (0, typeorm_1.JoinColumn)({ name: "order_id" }),
     __metadata("design:type", order_entity_1.Order)
 ], OrderDetail.prototype, "order", void 0);

@@ -11,15 +11,15 @@ export class UserController {
     @UseGuards(JwtAuthGuard)
     @Get('')
     async getProfile(@Req() req) {
-      const user = await this.userService.findOneById(req.user.id);
-      return user;
+        const user = await this.userService.findOneById(req.user.id);
+        return user;
     }
 
     @UseGuards(JwtAuthGuard)
     @Get('my-order')
     async getOrder(@Req() req) {
-    //   const user = await this.userService.findOneById(req.user.id);
-    //   return user;
+        const user = await this.userService.findOrder(req.user.id);
+        return user;
     }
 
 

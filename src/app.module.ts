@@ -9,7 +9,6 @@ import { ProductService } from './product/product.service';
 import { OrderService } from './order/order.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import config from './config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
 import { AccountType } from './user/account.type.entity';
@@ -37,6 +36,7 @@ import { OrderModule } from './order/order.module';
       charset: 'UTF8_UNICODE_CI',
       migrationsRun: true,
       migrations: [DefaultData1671226461376],
+      logging: false,
     }),
     AuthModule,
     UserModule,

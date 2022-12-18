@@ -8,7 +8,7 @@ import { LocalAuthGuard } from './local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService) { }
 
     @Inject()
     userService: UserService;
@@ -17,23 +17,7 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Req() req, @Res() res, @Session() session) {
-        
-        
-        // req.login(req.user, err => {
-        //     if (err || !req.user) {
-        //         throw err ||
-        //         new HttpException(
-        //             { status: HttpStatus.UNAUTHORIZED, error: `Unauthorized` },
-        //             HttpStatus.UNAUTHORIZED,
-        //         );
-        //     }
-
-        //     res.send(req.user);
-
-        // });
-
         const login = await this.authService.login(req.user);
-
         res.send(login);
     }
 

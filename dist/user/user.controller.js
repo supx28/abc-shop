@@ -22,6 +22,8 @@ let UserController = class UserController {
         return user;
     }
     async getOrder(req) {
+        const user = await this.userService.findOrder(req.user.id);
+        return user;
     }
 };
 __decorate([

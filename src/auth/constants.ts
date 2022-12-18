@@ -1,3 +1,3 @@
 export const jwtConstants = {
-    secret: 'abc-shop',
-  };
+  secret: 'abc-shop',
+};

@@ -31,23 +31,13 @@ const user_entity_1 = require("./user.entity");
 const bcrypt = require("bcrypt");
 const account_type_entity_1 = require("./account.type.entity");
 const user_profile_entity_1 = require("./user.profile.entity");
+const order_entity_1 = require("../order/order.entity");
 let UserService = class UserService {
-    constructor(userRepository, accountTypeRepository, userProfileRepository) {
+    constructor(userRepository, accountTypeRepository, userProfileRepository, orderRepository) {
         this.userRepository = userRepository;
         this.accountTypeRepository = accountTypeRepository;
         this.userProfileRepository = userProfileRepository;
-        this.users = [
-            {
-                userId: 1,
-                username: 'john',
-                password: 'changeme',
-            },
-            {
-                userId: 2,
-                username: 'maria',
-                password: 'guess',
-            },
-        ];
+        this.orderRepository = orderRepository;
     }
     async findOne(username) {
         const user = await this.userRepository.findOne({
@@ -111,13 +101,30 @@ let UserService = class UserService {
         const savedUserProfile = await this.userProfileRepository.save(userProfile);
         return savedUserProfile;
     }
+    async findOrder(id) {
+        const findUserById = await this.userRepository.findOneBy({ id: id });
+        const order = await this.orderRepository.find({
+            where: {
+                user: {
+                    id: findUserById.id
+                }
+            },
+            relations: ["orderDetail"]
+        });
+        if (order.length == 0) {
+            throw new common_1.HttpException('Orders not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return order;
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(1, (0, typeorm_1.InjectRepository)(account_type_entity_1.AccountType)),
     __param(2, (0, typeorm_1.InjectRepository)(user_profile_entity_1.UserProfile)),
+    __param(3, (0, typeorm_1.InjectRepository)(order_entity_1.Order)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], UserService);

@@ -6,6 +6,7 @@ import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 import { AccountType } from './account.type.entity';
 import { UserProfile } from './user.profile.entity';
+import { Order } from 'src/order/order.entity';
 
 @Injectable()
 export class UserService {
@@ -13,20 +14,8 @@ export class UserService {
         @InjectRepository(User) private userRepository: Repository<User>,
         @InjectRepository(AccountType) private accountTypeRepository: Repository<AccountType>,
         @InjectRepository(UserProfile) private userProfileRepository: Repository<UserProfile>,
+        @InjectRepository(Order) private orderRepository: Repository<Order>,
     ) { }
-
-    private readonly users = [
-        {
-            userId: 1,
-            username: 'john',
-            password: 'changeme',
-        },
-        {
-            userId: 2,
-            username: 'maria',
-            password: 'guess',
-        },
-    ];
 
     async findOne(username: string): Promise<any | undefined> {
         const user = await this.userRepository.findOne({
@@ -35,14 +24,12 @@ export class UserService {
             ]
         });
         return user;
-        // return this.users.find(user => user.username === username);
     }
 
     async findOneById(id: string): Promise<any | undefined> {
-        const user = await this.userRepository.findOneBy({id: id});
+        const user = await this.userRepository.findOneBy({ id: id });
         const { password, ...result } = user;
         return result;
-        // return this.users.find(user => user.username === username);
     }
 
     async hashPassword(password: string, salt: string) {
@@ -112,5 +99,25 @@ export class UserService {
 
         const savedUserProfile = await this.userProfileRepository.save(userProfile);
         return savedUserProfile;
+    }
+
+    async findOrder(id: string): Promise<any | undefined> {
+        const findUserById = await this.userRepository.findOneBy({ id: id })
+        const order = await this.orderRepository.find({
+            where: {
+                user: {
+                    id: findUserById.id
+                }
+            },
+            relations: ["orderDetail"]
+
+        });
+
+        if (order.length == 0) {
+            throw new HttpException('Orders not found', HttpStatus.NOT_FOUND);
+        }
+
+        return order;
+
     }
 }

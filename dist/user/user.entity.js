@@ -14,6 +14,7 @@ const base_entity_1 = require("../base/base.entity");
 const typeorm_1 = require("typeorm");
 const account_type_entity_1 = require("./account.type.entity");
 const user_profile_entity_1 = require("./user.profile.entity");
+const order_entity_1 = require("../order/order.entity");
 let User = class User extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -37,6 +38,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(type => user_profile_entity_1.UserProfile, userProfile => userProfile.user, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "profiles", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(type => order_entity_1.Order, order => order.user),
+    __metadata("design:type", Array)
+], User.prototype, "order", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

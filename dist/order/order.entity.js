@@ -13,6 +13,7 @@ exports.Order = void 0;
 const base_entity_1 = require("../base/base.entity");
 const user_entity_1 = require("../user/user.entity");
 const typeorm_1 = require("typeorm");
+const order_detail_entity_1 = require("./order.detail.entity");
 let Order = class Order extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -24,7 +25,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Order.prototype, "orderDate", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'payment_date' }),
+    (0, typeorm_1.Column)({ name: 'payment_date', nullable: true }),
     __metadata("design:type", Date)
 ], Order.prototype, "paymentDate", void 0);
 __decorate([
@@ -40,6 +41,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: "user_id" }),
     __metadata("design:type", user_entity_1.User)
 ], Order.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(type => order_detail_entity_1.OrderDetail, orderDetail => orderDetail.order, { cascade: ['insert', 'update', 'remove', 'recover'] }),
+    __metadata("design:type", Array)
+], Order.prototype, "orderDetail", void 0);
 Order = __decorate([
     (0, typeorm_1.Entity)()
 ], Order);
